@@ -1,9 +1,9 @@
 #  Build tool just like Ant - helps in building code in our dev. env.
 #  Project Management tool - helps in generating reports, dependency mgmt.
 
-#  Common Problems : 
+#  Common Problems :
 	1.  Mtliple JARS (like in Spring, Hibernate, etc).
-			- 
+			-
 	2.  Dependencies & versions
 	3.  Project Structure
 			- setup proper project structure.
@@ -13,19 +13,22 @@
 #  Maven talks to online repositories & gets the information (machine must be connected to internet)
 #  Maven architecture is itself an assembly of plugins & have a modular architecture.
 
+#  Download Maven Binaries from http://maven.apache.org/download.cgi
+#  Create a new env. variable M2_HOME with path as extracted maven folder.
+#  Give "...xyz...\bin" dir path to the PATH env. variable.
 
 > mvn --version
 > mvn archetype:generate
 1056: remote -> org.apache.maven.archetypes:maven-archetype-quickstart (An archetype which contains a sample Maven project.)
 Project arch type
 
-#  <groupId> : like package name		
+#  <groupId> : like package name
 <!-- group all the artifacts -->
 
-#  <artifactId> : classname 			
+#  <artifactId> : classname
 <!-- for whole app- by which name we will  -->build/deploy project}
 
-#  <version> : version number 
+#  <version> : version number
 
 #  <package> : takes the groupId itself
 <!-- the name of package where we need to place our src code, what package class should belongs to -->
@@ -33,42 +36,42 @@ Project arch type
 # creates a folder with artifactId containing "src" folder & pom.xml.
 # pom.xml contains information about application itself & what the dependencies are.
 # In pom.xml default packaging will be "jar"
-	
+
 	<groupId>maven.app</groupId>
 	<artifactId>MavenApp</artifactId>
-	<!-- artifactId : Build & save the application from this name --> 
-	
+	<!-- artifactId : Build & save the application from this name -->
+
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<!-- It is the build information -->
 
 	<name>MavenApp</name>
 	<!-- name : Our application will be called from this name. It will be the name of application, can be different from artifactId -->
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<!-- properties tells source code encoding of our project. -->
-  
+
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>			<!-- parent dir --> 
-			<artifactId>junit</artifactId>		<!-- child dir --> 
-			<version>3.8.1</version>			<!-- sub child dir --> 
+			<groupId>junit</groupId>			<!-- parent dir -->
+			<artifactId>junit</artifactId>		<!-- child dir -->
+			<version>3.8.1</version>			<!-- sub child dir -->
 			<scope>test</scope>					<!-- tells maven when to use this artifact -->
 		</dependency>
 	</dependencies>
 	<!-- Contains resources & dependencies, which are required for code. -->
-  
+
 # In "src" folder we have 2 folders "main" & "test".
 # In "main" folder we keep all our java classes.
 # In "test" folder we keep all our Junit test cases.
 <!-- Eclipse won't create "resources" directory, but creates "java" directory. -->
 
 
-# To compile maven app, go to dir where the pom.xml is 
+# To compile maven app, go to dir where the pom.xml is
 > mvn compile
-<!-- For the first time it will download all the required plugins & then compile all the classes in "src" folder 
+<!-- For the first time it will download all the required plugins & then compile all the classes in "src" folder
 It will create "target" folder also, which is the result of compile & build -->
 
 # To package application
@@ -77,7 +80,7 @@ It will create "target" folder also, which is the result of compile & build -->
 It will create JAR file in "target" folder.
 It also run our JUNIT test  cases. -->
 
-#  To execute JAR 
+#  To execute JAR
 > java -cp target/MavenApp-1.0-SNAPSHOT.jar maven.app.App.java
 <!-- java -cp folder/<jar> <JavaFile> -->
 
@@ -85,7 +88,7 @@ It also run our JUNIT test  cases. -->
 #  Maven gets all the information from maven repository(pom.xml-have Archetype & dependencies info.)
 
 #  Archetype info contains details about different types of projects that you wanna create, folder structure, & all the required information about creating a new project of that particular type.
-#  Dependencies conatins all the JARS you need in the project. 
+#  Dependencies conatins all the JARS you need in the project.
 
 #  Maven installs maven in our development env & creates directory structure.
 #  <groupId> tells that project belongs to which group
@@ -95,31 +98,31 @@ It also run our JUNIT test  cases. -->
 #  What Maven has done for us :
 	1. Create Project template, so that we donn't have to create each & every directory & file, structure & dource code.
 	2. Build & package the code for us.
-	
+
 #  Archetype - each archetype corresponds to a particular type of application you want to develop. (JavaEE app, Spring App, etc). While choosing it we are deciding what should be the project structure. It controls the layout of the files, folder structure & dependencies that are required.
 
-#  We use snapshot, when our code is still in development phase & not yet released. 
+#  We use snapshot, when our code is still in development phase & not yet released.
 
-#  Maven Coordinates (groupId, artifactId, version, package) will all affect what's pom.xml contains. 
+#  Maven Coordinates (groupId, artifactId, version, package) will all affect what's pom.xml contains.
 
-#  groupId, artifactId, version should be in such a way that other apps will be able to consume our artifacts if we choose to save it in a repository. 
+#  groupId, artifactId, version should be in such a way that other apps will be able to consume our artifacts if we choose to save it in a repository.
 
 #  Maven looks for artifact in local repository first, if not available then it go to online repository.
 
 
-#  Maven Build : 
+#  Maven Build :
 		- build lifecycle
 		- consists of phases
 			- validate phase (checks everything is in order, conf/code is in proper form)
 			- compile (generate class files)
 			- test (pulls up all the test cases & executes them)
 			- package (packaging of the application code)
-			- install (it is maven specific - install code to maven repository) 
+			- install (it is maven specific - install code to maven repository)
 			- deploy (also maven specific - if you are publishing the artifact to remote repository, where other users can download)
-			
+
 		- default behaviour of phases
 		- specify the build phase you need. (Previous phases automatically run.)
-		
+
 > mvn compile	(compiles only)
 > mvn test 		(compiles & test)
 > mvn package	(compiles, test & package)
@@ -131,7 +134,7 @@ It also run our JUNIT test  cases. -->
 
 #  Search & find API repository tags from https://mvnrepository.com
 
-#  If you dont provide <scope> to the dependency, it will take default value (i.e. compile - which means that this jar will be available at compile phase ) 
+#  If you dont provide <scope> to the dependency, it will take default value (i.e. compile - which means that this jar will be available at compile phase )
 
 
 #  For creating webapp using maven use [webapp-j2ee14], which have packaging as "war".
@@ -176,14 +179,14 @@ It also run our JUNIT test  cases. -->
           <target>1.8</target>
         </configuration>
 	- First clean then re-compile
-	
+
 #  Compiler in Maven is actually a plugin.
 #  "src.main" package contains 2 directories - "java" & "webapp".
 #  "java" dir contains empty package (maven.app) with no java files.
 #  "webapp" dir conatins "index.jsp" & "WEB-INF" directories.
 #  "WEB-INF" dir conatins only "web.xml" file only.
-#  "web.xml" file contains : 
-	
+#  "web.xml" file contains :
+
 	<?xml version="1.0" encoding="UTF-8"?>
 		<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 		<display-name>MavenWebApp</display-name>
@@ -196,12 +199,12 @@ It also run our JUNIT test  cases. -->
 			<welcome-file>index.jsp</welcome-file>
 			</welcome-file-list>
 		</web-app>
-  
-> mvn package 
-<!-- It will generate "target" folder with war file in it. 
+
+> mvn package
+<!-- It will generate "target" folder with war file in it.
 	 We can deploy war file to the server -->
 
-#  When we are using plugins (to use at building phase), we've to configure it in 		
+#  When we are using plugins (to use at building phase), we've to configure it in
 	<build>
 		<plugins>
 			<plugin>
@@ -211,10 +214,10 @@ It also run our JUNIT test  cases. -->
 			</plugin>
 		</plugins>
 	</build>
-	<!-- Jetty is a container for our web-app& doesn't have a welcome page like TOMCAT 
+	<!-- Jetty is a container for our web-app& doesn't have a welcome page like TOMCAT
 		CTRL+C (shutdowns the server)-->
-	
-> mvn clean	
+
+> mvn clean
 > mvn jetty:run
 #  I'll create "target" dir. containing "classes" & "work" directories.
 #  "work" dir contains "org.apache.jsp" package
@@ -251,10 +254,9 @@ It also run our JUNIT test  cases. -->
 
 #  Create Maven webapp Project in eclipse.
 <!-- Eclipse won't create "java" directory, but creates "resources" directory. -->
- 
+
 #  Run Eclipse maven webapp project.
 	1.  First Run as "Maven install".
 	2.  Then Run as "Maven Build...", which opens a window to enter goals.
 	3.  Enter "jetty:run" in Goals textbox & simply Run.
 	4.  You can also clean project using Run as "Maven clean"
-
